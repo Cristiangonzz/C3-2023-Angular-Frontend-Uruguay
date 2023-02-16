@@ -69,7 +69,9 @@ export class ApiService {
   //deleteAccount(){}
   //getAccountType(){}
   //getBalanceAccount(){}
-  //getCustomerAccount(){}
+  getAccount(id : string):Observable<Account>{
+    return this.http.get<Account>(`${this.BASE_URL}/account/getAccount/${id}`,this.httpOptions);
+  }
   //getStateAccount(){}
   //addBalanceAccount(){}
   //changeAccountType(){}
@@ -87,11 +89,8 @@ export class ApiService {
   }
 
 
-  createDeposti(account: CreateDeposit):Observable<Account>{
-    return this.http.post<Account>(`${this.BASE_URL}/deposit/create`,account,this.httpOptions);
-  }
   //--------------Customer----------------------------------------
-
+  
   //Trae todo los customer
   getAllCustomers():Observable<Customer[]>{
     return this.http.get<Customer[]>
@@ -102,15 +101,15 @@ export class ApiService {
   getOneCustomer(id : string):Observable<Customer>{
     return this.http.get<Customer>(`${this.BASE_URL}/customer/getInfo/${id}`,this.httpOptions);
   }
-
+  
 
   getDocumentType(document : string):Observable<DocumentType>{
     return this.http.get<DocumentType>(`${this.BASE_URL}/customer/document-type/find-id/${document}`,this.httpOptions);
   }
-
+  
   getEmailCustomer(email: string):Observable<Customer>{
-     return this.http.get<Customer>(`${this.BASE_URL}/customer/credecialesEmail/${email}`,this.httpOptions);
-      
+    return this.http.get<Customer>(`${this.BASE_URL}/customer/credecialesEmail/${email}`,this.httpOptions);
+    
   }
   //Acutalizar customer
   upDateCustomer(idCustomer : string,customer : upDateCustomerModel):Observable<Customer>{
@@ -119,18 +118,26 @@ export class ApiService {
   
   
   //--------------Deposit----------------------------
+  createDeposti(account: CreateDeposit):Observable<DepositModel>{
+    return this.http.post<DepositModel>(`${this.BASE_URL}/deposit/create`,account,this.httpOptions);
+  }
+
+  getDeposit():Observable<DepositModel[]>{
+    return this.http.get<DepositModel[]>(`${this.BASE_URL}/find-all`,this.httpOptions);
+
+  }
+
   //--------------Transfer----------------------------
-  //getDeposit(){}
   //getTransfer(){}
   //getBalance
   
   //get account type
-
-
+  
+  
   //create Account 
   //Create account type 
-
-
+  
+  
   
   
 

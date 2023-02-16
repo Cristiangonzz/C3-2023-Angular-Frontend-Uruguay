@@ -1,20 +1,22 @@
 
-<form [formGroup]="formDeposit" (ngSubmit)="createNewDeposit()">
-  <div>
+<form [formGroup]="formDeposit" > 
+
+    <div>
       <h1 class="text-lg-center"> Create Deposit </h1>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Account Id</span>
-      <input type="number" class="form-control" formControlName="accountId" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input type="number" class="form-control" formControlName="accountId" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
+        <input type="number" class="form-control" formControlName="amount" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+      
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" (click)="depositar()" >Confirm</button>
+      </div>
     </div>
-    
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
-      <input type="number" class="form-control" formControlName="amount" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-    </div>
-    
-    
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit">Confirm</button>
-    </div>
-  </div>
-</form>
+</form> 
+

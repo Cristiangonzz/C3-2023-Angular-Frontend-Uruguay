@@ -9,7 +9,6 @@ import { AdminGuard } from './guards/admin.guard';
 import { SinginComponent } from './login/singin/singin.component';
 import { CreateAccountTypeComponent } from './account/create-account-type/create-account-type.component';
 import { CreateTransferComponent } from './transfer/create-transfer/create-transfer.component';
-import { CreateDepositComponent } from './deposit/create-deposit/create-deposit.component';
 import { DepositListComponent } from './deposit/deposit-list/deposit-list.component';
 import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
@@ -68,7 +67,7 @@ const routes: Routes = [
    {path:`transfer`,component: CreateTransferComponent,pathMatch: 'full'},
    {path:`transfer/list`,component: TransferListComponent,pathMatch: 'full'},
    //Rutas de Deposit 
-   {path:`deposit`,component: CreateDepositComponent,pathMatch: 'full'},
+   {path:`deposit`,component: DepositListComponent,pathMatch: 'full'},
    {path:`deposit/list`,component: DepositListComponent,pathMatch: 'full'},
 ];
 

@@ -38,7 +38,7 @@ export class AccountService implements OnDestroy {
 
   updateOneAccount(id : string){
     if(this.observableAccountOne.observed && !this.observableAccountOne.closed){
-      this.apiService.getOneAccount(id).subscribe(
+      this.apiService.getAccount(id).subscribe(
         {
         next: (typeApi) => { this.newAccount = typeApi },
         complete: () => {this.observableAccountOne.next(this.newAccount);}

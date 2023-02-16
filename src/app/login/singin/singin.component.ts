@@ -21,6 +21,7 @@ export class SinginComponent implements OnInit {
   customerLogeado!:Customer;
   logeado:boolean = false;
   userSignIn!: SignIn ;
+  
   tokenUser : tokenUser = {
     username : "",
     password: "",

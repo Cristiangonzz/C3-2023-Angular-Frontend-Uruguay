@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DepositService } from "../service/deposit.service";
-import { CreateDeposit } from "../interface/deposit";
+import { DepositService } from '../service/deposit.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateDeposit } from '../interface/deposit';
 import { Account } from '../../account/interfaces/account';
-
+import { ApiService } from 'src/app/api/api.service';
+import { DepositModel } from '../interface/depositModel';
 
 @Component({
   selector: 'app-create-deposit',
@@ -12,45 +13,48 @@ import { Account } from '../../account/interfaces/account';
   styleUrls: ['./create-deposit.component.scss']
 })
 export class CreateDepositComponent implements OnInit {
-
-  public formDeposit!: FormGroup; 
-  deposit !: CreateDeposit;
-  accountUpdate!: Account;
-
-  constructor(
-    private formBuilder : FormBuilder,
-    private depositService : DepositService){}
+  
+  constructor(private depositService : DepositService,
+    private formBuilder: FormBuilder,
+    private api : ApiService){}
 
 
+    //infoDeposito!: DepositModel;
+
+    deposito! : CreateDeposit;
+    account!: Account;
+    public formDeposit!: FormGroup ; 
 
   ngOnInit(): void {
-    this.formDeposit = this.initFormDeposti()
-    this.dataDeposti();
+    this.formDeposit = this.initFormDeposit(); 
+    this.datosDeposito();
+    this.getAccount();
+
+  }
+  
+  depositar(){
+    this.api.createDeposti(this.deposito);
+    console.log(this.account.balance);
   }
 
-    
-    
-    initFormDeposti():FormGroup{
-      return this.formBuilder.group(
-       {
-        accountId:['',[Validators.required]],
-        amount:['',[Validators.required]],
-     });
-   }
+  getAccount(){
+    this.depositService.getAccount(this.deposito.accountId);
+    this.depositService.AccountObservable.subscribe(
+      (account : Account) =>(this.account = account)
+    );
+  }
+  datosDeposito(){
+    this.deposito.accountId = this.formDeposit.get('accountId')?.value;
+    this.deposito.amount = parseInt(this.formDeposit.get('amount')?.value);
+  }
 
-   dataDeposti(){
-    this.deposit.accountId = this.formDeposit.get('accountId')?.value;
-    this.deposit.amount = parseInt(this.formDeposit.get('amount')?.value);
-
-   }
-
-   createDeposit(){
-      this.depositService.getAccountCustomer(this.deposit);
-      this.depositService.DepositAccountObservable.subscribe(
-        (data:Account) => (this.accountUpdate = data))
-
-   }
-   createNewDeposit(){}
+  initFormDeposit():FormGroup{
+    return this.formBuilder.group(
+     {
+     accountId:['',[Validators.required]],
+     amount:['',[Validators.required]],
+   });
+ }
 
 
 }
