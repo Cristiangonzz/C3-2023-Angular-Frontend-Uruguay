@@ -1,36 +1,20 @@
 
 <div style="margin-left: 30%;">
-  <form (ngSubmit)="send()" [formGroup]="FormUpDate" class="align-items-center"> 
+  <form  [formGroup]="FormUpDate" class="align-items-center" *ngIf="!editado"> 
     <section>
       <h1 style="margin: 15px;color:rgb(8, 82, 141);"> Registrarse</h1>
     </section>
 
     <div class="col-md-6">
     <label label for="inputDocumentType" class="form-label">Document Type</label>
-        <select style="margin: 3px;" class="form-select" aria-label="Default select example" formControlName="documentTypeId">
+        <select style="margin: 3px;" class="form-select" aria-label="Default select example" formControlName="documentType">
           <option value="1">Cedula</option>
           <option value="2">Credencial</option>
           <option value="3">Pasaporte</option>
         </select>
-        <div *ngIf="FormUpDate.get('documentTypeId')?.touched && FormUpDate.get('documentTypeId')?.errors?.['required']"
+        <div *ngIf="FormUpDate.get('documentType')?.touched && FormUpDate.get('documentType')?.errors?.['required']"
         class="alert alert-danger"> this field is required</div>
-        
     </div>
-
-    <div class="col-md-6">
-      <label label for="inputDocumentType" class="form-label">Account Type</label>
-          <select style="margin: 3px;" class="form-select" aria-label="Default select example" formControlName="accountTypeId">
-            <option value="1">Caja de ahorro en Pesos ($)</option>
-            <option value="2">Caja de ahorro en Dolares (US$)</option>
-            <option value="3">Caja corriente en Pesos ($)</option>
-            <option value="4">Caja corriente en Dolares (US$)</option>
-          </select>
-
-          <div *ngIf="FormUpDate.get('accountTypeId')?.touched && FormUpDate.get('accountTypeId')?.errors?.['required']"
-      class="alert alert-danger"> this field is required</div>
-
-      </div>
-
 
     <div class="col-md-6">
       <label for="inputDocument" class="form-label">Document</label>
@@ -77,28 +61,16 @@
 
     </div>
 
-    
-    <div class="col-md-6">
-      <label label for="inputDocumentType" class="form-label">Account Type</label>
-          <select style="margin: 3px;" class="form-select" aria-label="Default select example" formControlName="accountTypeId">
-            <option value="1">Caja de ahorro en Pesos ($)</option>
-            <option value="2">Caja de ahorro en Dolares (US$)</option>
-            <option value="3">Caja corriente en Pesos ($)</option>
-            <option value="4">Caja corriente en Dolares (US$)</option>
-          </select>
-
-          <div *ngIf="FormUpDate.get('accountTypeId')?.touched && FormUpDate.get('accountTypeId')?.errors?.['required']"
-      class="alert alert-danger"> this field is required</div>
-
-      </div>
-    <!-- <label style="color: rgb(13, 13, 151);" for="terms">Accept terms</label>
-    <input style="margin: 2%;color: blue;" type="checkbox" formControlName="terms" id="terms"> -->
-
     <a routerLink="/singin" style="margin: 10%;" >Sign in</a>
     <div class="col-12">
-      <button [disabled]="FormUpDate.invalid" type="submit" class="btn btn-primary">Confirmar</button>
+      <button [disabled]="FormUpDate.invalid" type="submit" class="btn btn-primary"(click)="send()">Confirmar</button>
       <button style="margin: 20px;" class="btn btn-dark" routerLink="/singin">Cancelar</button>
     </div>
 
   </form>
+</div>
+
+<div *ngIf="editado">
+<app-home [customer]="customerEditado"></app-home>
+
 </div>

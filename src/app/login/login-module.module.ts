@@ -8,6 +8,7 @@ import { SinginComponent } from "./singin/singin.component";
 import { SingupComponent } from "./singup/singup.component";
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ComponentsModule,
   ],
   exports:[
     SinginComponent,

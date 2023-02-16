@@ -14,7 +14,7 @@ import { DepositListComponent } from './deposit/deposit-list/deposit-list.compon
 import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import { CustomerByOneListComponent } from './customer/customer-by-one-list/customer-by-one-list.component';
-import { FindByOneIdComponent } from './components/find-by-one-id/find-by-one-id.component';
+import { FindByOneIdComponent } from './components/buscador/find-by-one-id.component';
 import { UpdateComponent } from './customer/update/update.component';
 import { UpDateComponent } from './account/up-date/up-date.component';
 import { AccountByOneComponent } from './account/account-by-one/account-by-one.component';

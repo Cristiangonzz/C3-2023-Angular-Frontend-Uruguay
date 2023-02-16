@@ -1,22 +1,44 @@
-<div class="d-flex flex-column align-items-center">
-    <img alt="fotoperfil" [src]="customer?.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3">
-  
-    <h2 class="text-xl font-weight-bold">Nombre completo:  <ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></h2>
-    <h2 class="text-xl font-weight-bold">Documento: <ng-container *ngIf="customer">{{ customer.document }}</ng-container></h2>
-    <h2 class="text-xl font-weight-bold">Documento ID: <ng-container *ngIf="customer">{{ customer.documentType.id }}</ng-container></h2>
-    <h2 class="text-xl font-weight-bold">Correo: <ng-container *ngIf="customer">{{ customer.email }}</ng-container></h2>
-    <h2 class="text-xl font-weight-bold">Telefono: <ng-container *ngIf="customer">{{ customer.phone }}</ng-container></h2>
+
+<!-- <div class="user-wrapper d-flex align-items-center">
+
+    <button type="button" class="dropdown-toggle d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src=`{{customer.avatarUrl}}` alt="borrar" class="rounded-circle">
+    <span class="d-none d-lg-block d-xl-block"><ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></span>
+  </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" type="button">Perfil</a>
+      <a class="dropdown-item" type="button">Notificaciones <span class="badge badge-success ml-2">5</span> </a>
+      <a class="dropdown-item" type="button">Editar</a>
+      <button (click)="signOut()"   class="btn btn-danger">Salir</button>
+    </div>
+
+  </div>
+    -->
+    
+    <div class="d-flex flex-column align-items-center" *ngIf="!salir"> 
+    <!-- <div class="div">
+       <img alt="fotoperfil" [src]="customer?.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3">
+    </div> 
+   -->
+    <h4 class="text-xl font-weight-bold">Nombre completo:  <ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></h4>
+    <h4 class="text-xl font-weight-bold">Documento: <ng-container *ngIf="customer">{{ customer.document }}</ng-container></h4>
+    <h4 class="text-xl font-weight-bold">Documento ID: <ng-container *ngIf="customer">{{ customer.documentType.id }}</ng-container></h4>
+    <h4 class="text-xl font-weight-bold">Correo: <ng-container *ngIf="customer">{{ customer.email }}</ng-container></h4>
+    <h4 class="text-xl font-weight-bold">Telefono: <ng-container *ngIf="customer">{{ customer.phone }}</ng-container></h4>
     <br>
     <button class="btn btn-primary" (click)="Edit()">Editar datos</button>
+    
+    <br><button   (click)="deleteCustmer()"   class="btn btn-danger">Borrar cuenta</button>
     <br>
-    <button [routerLink]="['/account']"class="btn btn-primary mb-2">Confirmar</button>
-    <br>
-    <button   (click)="deleteCustmer()"   class="btn btn-danger">Borrar cuenta</button>
+    <button   (click)="signOut()"  routerLink="/singin" class="btn btn-danger">Salir</button>
+  </div> 
+  
+  <div *ngIf="salir">
+    
   </div>
 
 
-
-<div class="container">
+<!-- <div class="container">
     <nav>
             <ul class="mcd-menu">
                 <li>
@@ -98,4 +120,4 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </div> -->

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from '../../customer/interface/customer';
+import { ApiService } from 'src/app/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +12,30 @@ import { Customer } from '../../customer/interface/customer';
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private customerService : CustomerService){}
+  constructor(private customerService : CustomerService,
+    private api : ApiService,
+    private router : Router){}
 
-  customer!:Customer;
+  salir = false;
+  @Input() customer!:Customer;
+  editado!: string;
 
-  ngOnInit(): void {
-    this.customerService.customerOneObservable.subscribe(
-      (data) => {this.customer = data}
-      );
+  ngOnInit():void{
   }
 
-  Edit(){}
+  Edit(){
+    this.router.navigate([`customerEdit/${this.customer.id}`]);
+  }
+   
   deleteCustmer(){}
+
+  signOut(){
+
+    sessionStorage.removeItem("token");
+    this.salir = true;
+  }
+ 
+
   
 
 }

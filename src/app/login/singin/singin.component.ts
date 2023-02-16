@@ -6,6 +6,8 @@ import { tokenUser } from '../interfaces/tokenModel';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from 'src/app/customer/interface/customer';
+import { ApiService } from '../../api/api.service';
+import { upDateCustomerModel } from 'src/app/customer/interface/upDateCustomer';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class SinginComponent implements OnInit {
   
   //token ! : string;
   customerLogeado!:Customer;
+  logeado:boolean = false;
   userSignIn!: SignIn ;
   tokenUser : tokenUser = {
     username : "",
@@ -29,15 +32,12 @@ export class SinginComponent implements OnInit {
   constructor(private authService : AuthService,
     private formBuilder : FormBuilder,
     private router : Router,
-    private customerService : CustomerService ){}
-    
+    private customerService : CustomerService,
+    private api : ApiService ){}
+  
   ngOnInit(): void {
       
     this.formLogin = this.initFormLogin();
-    //Enviar a la base de datos 
-    
-    //Despues reseteoo 
-    
   }
 
   
@@ -47,25 +47,33 @@ export class SinginComponent implements OnInit {
       username:['',[Validators.required]],
       password:['',[Validators.required]],
     });
+
   }
 
   signIn(){ // Tiene un error que al principio no me lee el token 
      this.userSignIn = this.formLogin.getRawValue();
     
-    //busca en el backend el correo y pass
-    this.authService.newSigIn(this.userSignIn);
-    this.tokenUser = this.authService.getUserLocalStorage();
-    console.log(this.tokenUser);
-    
-    //verifica si exite en firebase
-    this.authService.loginFire(this.userSignIn)
-    .then( data => {
-      console.log(data)
-      this.router.navigate(["/home"]) 
+     
+     //verifica si exite en firebase
+     this.authService.loginFire(this.userSignIn)
+     .then( data => {
+       console.log(data)
       })
-    .catch(err => (console.log(err))); 
-
-    this.getCustomerEmail();
+      .catch(err => (console.log(err))); 
+      
+      //busca en el backend el correo y pass
+      this.authService.newSigIn(this.userSignIn);
+      
+      this.tokenUser = this.authService.getUserLocalStorage();
+      console.log(this.tokenUser);
+      
+      //si es valida la cuenta entonces busco en mi backend el customer
+      this.actualizarCustomerEmail(this.formLogin.get("username")?.value);
+      this.getCustomerEmail();
+       
+      //Si esta todo bien nos movemos al home
+      //this.router.navigate(["/home"]) ;
+      this.logeado = true;
   }
 
   google(){
@@ -74,12 +82,22 @@ export class SinginComponent implements OnInit {
     .catch(err => console.log(err))
   }
 
-  getCustomerEmail(){
-    this.customerService.getEmail(this.userSignIn.username); 
-    // this.customerService.customerOneObservable.subscribe(
-    //   (data) => {this.customerLogeado = data}
-    // );
+
+  //Ahora este id es el que tengo enviar al servicio para traer el customer 
+  actualizarCustomerEmail(email : string):void{
+    this.customerService.getEmail(email);
   }
+
+//Despues de que tengo el customer enotonces se lo igualo a mi varaible 
+  getCustomerEmail(){
+    this.customerService.customerLogeadoObservable.subscribe(
+      (data : Customer) => { this.customerLogeado = data;
+      console.log(this.customerLogeado)}
+    )
+    this.customerService.getEmail(this.formLogin.get('username')?.value);
+
+  }
+  
 
   
   

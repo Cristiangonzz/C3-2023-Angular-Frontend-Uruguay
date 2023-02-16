@@ -7,6 +7,7 @@ import { SignUpModel } from '../login/interfaces/signUpModel';
 import { SignIn, UserResponse } from '../login/interfaces/signInModel';
 import { CookieService } from 'ngx-cookie-service';
 import { upDateCustomerModel } from '../customer/interface/upDateCustomer';
+import { DocumentType } from '../customer/interface/documentType';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ApiService {
     headers : new HttpHeaders({
       //'Content-Type': 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'POST,GET',
+      'Access-Control-Allow-Methods': 'POST,GET,PUT',
       'Access-Control-Allow-Origin': '*'
     })
   }
@@ -37,6 +38,10 @@ export class ApiService {
   //Me tendria que retornar el token 
   sigUp(newCustomer: SignUpModel):Observable<string>{ // pasarle el string del documentType.id porque en el backend verifica si es strign
     return this.http.post(`${this.BASE_URL}/security/singUp`, newCustomer, {responseType: 'text'} );
+  }
+
+  sigOut(token:string){
+    this.http.post(`${this.BASE_URL}/security/singOut/${token}`,this.httpOptions);
   }
   
   // logOut():void{}
@@ -79,27 +84,30 @@ export class ApiService {
     return this.http.get<Account>(`${this.BASE_URL}/account/customer/${id}`,this.httpOptions);
   }
   //--------------Customer----------------------------------------
-  //(){}
-  
+
+  //Trae todo los customer
   getAllCustomers():Observable<Customer[]>{
     return this.http.get<Customer[]>
     (`${this.BASE_URL}/customer/all`,this.httpOptions)
   }
 
+  //Busca un customer por id
   getOneCustomer(id : string):Observable<Customer>{
     return this.http.get<Customer>(`${this.BASE_URL}/customer/getInfo/${id}`,this.httpOptions);
   }
+
 
   getDocumentType(document : string):Observable<DocumentType>{
     return this.http.get<DocumentType>(`${this.BASE_URL}/customer/document-type/find-id/${document}`,this.httpOptions);
   }
 
   getEmailCustomer(email: string):Observable<Customer>{
-    return this.http.get<Customer>(`${this.BASE_URL}/credecialesEmail/${email}`,this.httpOptions);
+     return this.http.get<Customer>(`${this.BASE_URL}/customer/credecialesEmail/${email}`,this.httpOptions);
+      
   }
-  
-  upDateCustomer(customer : upDateCustomerModel,idCustomer : string):Observable<upDateCustomerModel>{
-    return this.http.put<upDateCustomerModel>(`${this.BASE_URL}/customer/update/${idCustomer}`,customer);
+  //Acutalizar customer
+  upDateCustomer(idCustomer : string,customer : upDateCustomerModel):Observable<Customer>{
+    return this.http.put<Customer>(`${this.BASE_URL}/customer/update/${idCustomer}`,customer,this.httpOptions);
   }
   
   

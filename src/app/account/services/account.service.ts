@@ -15,7 +15,8 @@ export class AccountService implements OnDestroy {
 
   //Una lista de acocunt
   protected newAccounts : Account[] = [];
-  public observableAccount : BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>(this.newAccounts); // le asigno un valor por defecto
+  public observableAccount : BehaviorSubject<Account[]>
+   = new BehaviorSubject<Account[]>(this.newAccounts); // le asigno un valor por defecto
 
 
   constructor(private apiService : ApiService) { }

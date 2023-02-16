@@ -34,6 +34,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     AccountModule,
     CustomerModule,
     ComponentsModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     

@@ -8,7 +8,7 @@ export interface Customer {
     email: string;
     phone: string;
     password: string;
-    avatarUrl?: string ;
+    avatarUrl?: string | undefined;
     state: boolean;
-    daletedAt?: Date | number ;
+    daletedAt?: Date | number| undefined;
 }

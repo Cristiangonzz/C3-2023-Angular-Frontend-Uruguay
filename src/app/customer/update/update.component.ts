@@ -1,9 +1,12 @@
 import { Component, Host, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { SignUpModel } from 'src/app/login/interfaces/signUpModel';
 import { CustomerService } from '../service/customer.service';
 import { Customer } from '../interface/customer';
+import { upDateCustomerModel } from '../interface/upDateCustomer';
+import { ApiService } from '../../api/api.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-update',
@@ -15,74 +18,74 @@ export class UpdateComponent implements OnInit{
 
   //Variables
   customerId: string = "";
-  editar = false;
-  customerEdit!: Customer;
-  public FormUpDate!: FormGroup;
   
-  customer : SignUpModel = { 
-    documentTypeId : "",
-    accountTypeId: "",
-    document: "",
-    fullName: " ",
-    email: "",
-    phone: "",
-    password: "",
-  }
+  editado = false;
+
+  customer!: Customer;
+  customerEditado!:Customer;
+
+
+  public FormUpDate!: FormGroup;
 
   constructor(
-    /* @Host()*/ public customerService: CustomerService,
+    public customerService: CustomerService,
     private formBuilder : FormBuilder,
-    public  readonly activatedRoute: ActivatedRoute){}
+    public  readonly activatedRoute: ActivatedRoute,
+    private api : ApiService,
+    private router : Router){}
 
   ngOnInit(): void {
-    this.FormUpDate = this.initForm();
+
     this.paramsCustomerId();//me guarda el parametro en => customerId
-    this.editarCustomer();//capturo los datos de mi api atraves del servicio
-    this.upDateFromApi();//lo muestro en el fomulario 
+
+    this.FormUpDate = this.initForm();
+    this.getCustomerId();
   }
   
-  editarCustomer(){
+
+  getCustomerId(){
     //actualizo el customer pasando el identificaado del customer
-    this.customerService.updateOneCustomer(this.customerId);
-    //Ahora lo capuro y lo igualo a mi variable customer
-    this.customerService.customerOneObservable
-    .subscribe((data : Customer) => {this.customerEdit = data}); 
-    this.customerService.updateOneCustomer(this.customerId);  
+    this.api.getOneCustomer(this.customerId).subscribe(
+      (data:Customer)=>{
+        this.customer = data;
+        console.log(this.customer);
+      this.upDateFromApi();}
+    );
+    
   }
   
   initForm():FormGroup{
     return this.formBuilder.group(
       {
-        // documentType:[],
-        documentTypeId:['',[Validators.required]],
-        accountTypeId:['',[Validators.required]],
+        documentType:['',[Validators.required]],
         document:['',[Validators.required]],
         fullName:['',[Validators.required]],
         email:['',[Validators.required,Validators.email]],
         phone:['',[Validators.required]],
-        password:['',[Validators.required,Validators.minLength(8)]],
-        
+        password:['',[Validators.required,Validators.minLength(8)]]
       })
   }
     
-  //Funcion para actualizar la info del formulario 
   upDateFromApi():void{
     const response = {
-      documentTypeId: this.customerEdit.documentType.id,
-      document:this.customerEdit.document,
-      fullName:this.customerEdit.fullName,
-      email:this.customerEdit.email,
-      phone:parseInt(this.customerEdit.phone),
-      password:this.customerEdit.password,
+      documentType: this.customer.documentType.id,
+      document:this.customer.document,
+      fullName:this.customer.fullName,
+      email:this.customer.email,
+      phone:parseInt(this.customer.phone),
+      password:this.customer.password
     }
     this.FormUpDate.patchValue(response);
   }
 
 
   send():void{
-    console.log('form => ',this.FormUpDate.value); 
-    //this.customerService.upDateCustomer(thi)
-     
+    
+    this.api.upDateCustomer(this.customerId,this.FormUpDate.getRawValue()).subscribe(
+      (data:Customer)=>(this.customerEditado = data)
+    ); 
+    this.editado = true;
+    //this.router.navigate(['home']);
   }
 
   paramsCustomerId():void{ 
@@ -91,11 +94,5 @@ export class UpdateComponent implements OnInit{
         this.customerId = params['id']
       });
   }
-
-  
-  saveEdit(){
-    
-  }
-  
 
 }

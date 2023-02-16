@@ -5,6 +5,8 @@ import { CustomerByOneListComponent } from './customer-by-one-list/customer-by-o
 import { RouterModule } from '@angular/router';
 import { UpdateComponent } from './update/update.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HomeComponent } from '../components/home/home.component';
+import { ComponentsModule } from "../components/components.module";
 
 
 
@@ -20,11 +22,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    ComponentsModule,
   ],
   exports : [
     CustomerListComponent,
     CustomerByOneListComponent,
     UpdateComponent,
+   
+    
   ]
 
 })

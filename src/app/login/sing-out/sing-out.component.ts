@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ApiService } from '../../api/api.service';
 
 @Component({
   selector: 'app-sing-out',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class SingOutComponent {
 
+  constructor(private api : ApiService){}
+
+
+  @Input() out : boolean = false;
+  
+  signOut(){
+    
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.api.sigOut(token);
+      sessionStorage.removeItem('token');
+    }
+    this.out = true;
+  }
 }

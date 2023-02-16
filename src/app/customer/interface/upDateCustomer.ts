@@ -2,10 +2,9 @@ export interface upDateCustomerModel {
     
         documentType: string,
         document: string,
-        email: string,
         fullName: string,
+        email: string,
+        phone: string
         password: string,
-        phone: string,
-        state: boolean
     
 }
