@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SignIn, UserResponse } from '../interfaces/signInModel';
+import { SignIn } from '../interfaces/signInModel';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { tokenUser } from '../interfaces/tokenModel';
@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from 'src/app/customer/interface/customer';
 import { ApiService } from '../../api/api.service';
-import { upDateCustomerModel } from 'src/app/customer/interface/upDateCustomer';
 
 
 @Component({

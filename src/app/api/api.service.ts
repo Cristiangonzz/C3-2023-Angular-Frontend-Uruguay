@@ -8,6 +8,8 @@ import { SignIn, UserResponse } from '../login/interfaces/signInModel';
 import { CookieService } from 'ngx-cookie-service';
 import { upDateCustomerModel } from '../customer/interface/upDateCustomer';
 import { DocumentType } from '../customer/interface/documentType';
+import { CreateDeposit } from '../deposit/interface/deposit';
+import { DepositModel } from '../deposit/interface/depositModel';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +84,11 @@ export class ApiService {
 
   getOneAccount(id : string):Observable<Account>{
     return this.http.get<Account>(`${this.BASE_URL}/account/customer/${id}`,this.httpOptions);
+  }
+
+
+  createDeposti(account: CreateDeposit):Observable<Account>{
+    return this.http.post<Account>(`${this.BASE_URL}/deposit/create`,account,this.httpOptions);
   }
   //--------------Customer----------------------------------------
 
