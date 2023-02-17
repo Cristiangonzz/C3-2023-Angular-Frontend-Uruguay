@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateTransferModel } from '../interface/createTransferModel';
 import { TransferModel } from '../interface/transferModel';
 import { Router } from '@angular/router';
+import { ApiService } from '../../api/api.service';
 
 @Component({
   selector: 'app-create-transfer',
@@ -15,7 +16,8 @@ export class CreateTransferComponent implements OnInit{
   
   constructor(public serviceTransfer : TransferService,
     private formBuilder : FormBuilder,
-    private router : Router){}
+    private router : Router,
+    private api : ApiService){}
     fromTransfer!:FormGroup;
     createTransfer!: CreateTransferModel;
   
@@ -40,11 +42,10 @@ export class CreateTransferComponent implements OnInit{
  }
  transferir(){
    this.createTransfer = this.fromTransfer.getRawValue();
-   this.serviceTransfer.createTransfer(this.createTransfer);
-   this.serviceTransfer.transferObservable.subscribe(
-    (data : TransferModel) => (console.log(data)
-    ));
-
+   this.api.createTransfers(this.createTransfer).subscribe(
+    (data)=> (console.log(`transferencia =>`,data))
+   );
+   this.router.navigate(['home']);
  }
 
 }

@@ -12,6 +12,7 @@ import { CreateDeposit } from '../deposit/interface/deposit';
 import { DepositModel } from '../deposit/interface/depositModel';
 import { CreateTransferModel } from '../transfer/interface/createTransferModel';
 import { TransferModel } from '../transfer/interface/transferModel';
+import { CreateAccount } from '../account/interfaces/createAccount';
 
 @Injectable({
   providedIn: 'root'
@@ -48,24 +49,12 @@ export class ApiService {
     this.http.post(`${this.BASE_URL}/security/singOut/${token}`,this.httpOptions);
   }
   
-  // logOut():void{}
-  // private readToken():void{ //Guardar el token en el local storage
 
-  // }
-  // private saveToken():void{ // para guardar el token
-
-  // }
-  // private handlerError(err:any):Observable<never>{
-  //   let errorMensaje = `A ocurrido un Error`;
-  //   if(err){
-  //     errorMensaje = `Error : code ${err.message}`
-  //   } 
-  //   window.alert(errorMensaje);
-  //   return throwError(errorMensaje);
-  // }
   
   //--------------Account----------------------------
-  //createAccount(){}
+  createAccount(account : CreateAccount):Observable<Account>{
+    return this.http.post<Account>(`${this.BASE_URL}/account/create`,account,this.httpOptions);
+  }
   //createAccountType(){}
   //updateAccount(){}
   //deleteAccount(){}

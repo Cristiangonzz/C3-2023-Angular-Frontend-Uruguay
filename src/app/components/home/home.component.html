@@ -1,112 +1,19 @@
 
-<!-- <div class="user-wrapper d-flex align-items-center">
-
-    <button type="button" class="dropdown-toggle d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src=`{{customer.avatarUrl}}` alt="borrar" class="rounded-circle">
-    <span class="d-none d-lg-block d-xl-block"><ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></span>
-  </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" type="button">Perfil</a>
-      <a class="dropdown-item" type="button">Notificaciones <span class="badge badge-success ml-2">5</span> </a>
-      <a class="dropdown-item" type="button">Editar</a>
-      <button (click)="signOut()"   class="btn btn-danger">Salir</button>
-    </div>
-
-  </div>
-    -->
+    <div class="d-flex flex-column align-items-center" > 
     
-    <div class="d-flex flex-column align-items-center" *ngIf="!salir"> 
-    <!-- <div class="div">
-       <img alt="fotoperfil" [src]="customer?.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3">
-    </div> 
-   -->
-    <h4 class="text-xl font-weight-bold">Nombre completo:  <ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></h4>
-    <h4 class="text-xl font-weight-bold">Documento: <ng-container *ngIf="customer">{{ customer.document }}</ng-container></h4>
-    <h4 class="text-xl font-weight-bold">Documento ID: <ng-container *ngIf="customer">{{ customer.documentType.id }}</ng-container></h4>
-    <h4 class="text-xl font-weight-bold">Correo: <ng-container *ngIf="customer">{{ customer.email }}</ng-container></h4>
-    <h4 class="text-xl font-weight-bold">Telefono: <ng-container *ngIf="customer">{{ customer.phone }}</ng-container></h4>
+        <!-- <small>
+        <img alt="fotoperfil" [src]="customer.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3">
+        </small> -->
+        <h4 class="text-xl font-weight-bold">Nombre completo:  <ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></h4>
+        <h4 class="text-xl font-weight-bold">Documento: <ng-container *ngIf="customer">{{ customer.document }}</ng-container></h4>
+        <h4 class="text-xl font-weight-bold">Documento ID: <ng-container *ngIf="customer">{{ customer.documentType.id }}</ng-container></h4>
+        <h4 class="text-xl font-weight-bold">Correo: <ng-container *ngIf="customer">{{ customer.email }}</ng-container></h4>
+        <h4 class="text-xl font-weight-bold">Telefono: <ng-container *ngIf="customer">{{ customer.phone }}</ng-container></h4>
     <br>
     <button class="btn btn-primary" (click)="Edit()">Editar datos</button>
-    
-    <br><button   (click)="deleteCustmer()"   class="btn btn-danger">Borrar cuenta</button>
     <br>
     <button   (click)="signOut()"  routerLink="/singin" class="btn btn-danger">Salir</button>
-  </div> 
-  
-  <div *ngIf="salir">
-    
-  </div>
+
+</div> 
 
 
-<div class="container">
-    <nav>
-            <ul class="mcd-menu">
-                <li>
-                    <a href="">
-                        <i class="fa fa-home"></i>
-                        <strong>Home</strong>
-                        
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/createDeposit" class="active">
-                        <i class="fa fa-edit"></i>
-                        <strong>Create Deposit</strong>
-                        <ul>
-                            <li><a routerLink="/deposit/list"><i class="fa fa-globe"></i>Listado de Depositos</a></li>
-                        </ul>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="/createTransfer">
-                        <i class="fa fa-gift"></i>
-                        <strong>Create Transfer</strong>
-                        <ul>
-                            <li><a routerLink="/transfer/list"><i class="fa fa-globe"></i>List Transfer</a></li>
-                        </ul>
-                        
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-globe"></i>
-                        <strong>News</strong>
-                       
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-comments-o"></i>
-                        <strong>Blog</strong>
-                       
-                    </a>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-globe"></i>Mission</a></li>
-                        <li>
-                            <a href="#"><i class="fa fa-group"></i>Our Team</a>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-female"></i>Leyla Sparks</a></li>
-                                <li>
-                                    <a href="#"><i class="fa fa-male"></i>Gleb Ismailov</a>
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-leaf"></i>About</a></li>
-                                        <li><a href="#"><i class="fa fa-tasks"></i>Skills</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#"><i class="fa fa-female"></i>Viktoria Gibbers</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-trophy"></i>Rewards</a></li>
-                        <li><a href="#"><i class="fa fa-certificate"></i>Certificates</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-picture-o"></i>
-                        <strong>Portfolio</strong>
-                        
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div> 

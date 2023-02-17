@@ -1,6 +1,6 @@
-
+<!-- *ngIf="!editado" -->
 <div style="margin-left: 30%;">
-  <form  [formGroup]="FormUpDate" class="align-items-center" *ngIf="!editado"> 
+  <form  [formGroup]="FormUpDate" class="align-items-center" > 
     <section>
       <h1 style="margin: 15px;color:rgb(8, 82, 141);"> Registrarse</h1>
     </section>
@@ -70,7 +70,9 @@
   </form>
 </div>
 
-<div *ngIf="editado">
+
+
+<!-- <div *ngIf="editado">
 <app-home [customer]="customerEditado"></app-home>
 
-</div>
+</div> -->

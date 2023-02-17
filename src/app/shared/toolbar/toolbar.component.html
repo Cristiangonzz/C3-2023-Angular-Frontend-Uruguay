@@ -1,41 +1,44 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <ng-container *ngIf="!isAdmin,else viewAdmin">
   <div class="container-fluid">
-    <a class="navbar-brand" style="margin-left: 45%;color: rgb(5, 5, 106);" routerLink="/home">e-Bank</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand" style="margin-left: 45%;color: rgb(5, 5, 106);" (click)="btnPrincipal()">e-Bank</a>
     
   </div>
   </ng-container>
   <button (click)="isAdmin = !isAdmin">Admin</button>
   <ng-template #viewAdmin>
       <div class="collapse navbar-collapse" id="navbarNav">
+        
         <ul class="navbar-nav">
+          <a class="navbar-brand" style="margin-left: 4%;color: rgb(5, 5, 106);" (click)="btnPrincipal()">e-Bank</a>
           <li class="nav-item">
             <a class="nav-link"  routerLink="/account/find-all">Accounts</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" routerLink="/customerList">Customers</a>
+            <a class="nav-link" routerLink="/customerList">List Customers</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link"  routerLink="/createTransfer">Transfer</a>
+            <a class="nav-link"  routerLink="/createTransfer">Create Transfer</a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link"  routerLink="/transfer/list">List Transfer</a>
           </li>
-          
+    
           <li class="nav-item">
-            <a class="nav-link" routerLink="/createDeposit">Deposit</a>
+            <a class="nav-link" routerLink="/search">search</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/search">buscador</a>
+            <a routerLink="/createDeposit" class="nav-link">Create Deposit</a> 
           </li>
-          
+               
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/deposit/list">List Depositos</a>
+          </li>
+   
         </ul>
       </div>
     </ng-template>

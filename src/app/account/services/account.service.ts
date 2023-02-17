@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Account } from '../interfaces/account';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/api/api.service';
+import { CreateAccount } from '../interfaces/createAccount';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AccountService implements OnDestroy {
     this.observableAccountOne.unsubscribe();
   }
 
-
+  
   updateAccountList = () =>{
     if(this.observableAccount.observed && !this.observableAccount.closed){
       this.apiService.getAllAccounts().subscribe({

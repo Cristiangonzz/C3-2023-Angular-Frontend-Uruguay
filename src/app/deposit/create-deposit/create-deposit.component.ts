@@ -17,7 +17,8 @@ export class CreateDepositComponent implements OnInit {
   
   constructor(public depositService : DepositService,
     private formBuilder: FormBuilder,
-    private router : Router){}
+    private router : Router,
+    private api : ApiService){}
 
 
     infoUltimoDeposito!: DepositModel;
@@ -34,29 +35,18 @@ export class CreateDepositComponent implements OnInit {
   ngOnInit(): void {
     this.formDeposit = this.initFormDeposit(); 
     
+    
   }
   
   depositar(){
-    this.datosDeposito();
-    this.depositService.createDeposit(this.deposito);
-    this.depositService.createDepositObservable.subscribe(
-      (data:DepositModel) => (this.infoUltimoDeposito = data)
-    );
-    console.log(this.infoUltimoDeposito);
-    this.router.navigate(['/home']);
-  }
-
-  getAccount(){
-    this.depositService.getAccount(this.deposito.accountId);
-    this.depositService.AccountObservable.subscribe(
-      (account : Account) =>(console.log(account))
-    );
-  }
-
-  datosDeposito(){
     this.deposito.accountId = this.formDeposit.get('accountId')?.value;
-    this.deposito.amount = parseInt(this.formDeposit.get('amount')?.value);
+    this.deposito.amount = this.formDeposit.get('amount')?.value;
+    this.api.createDeposti(this.deposito).subscribe(
+      (data)=> (console.log(`Deposito =>`,data))
+    )
+   // this.router.navigate(['/home']);
   }
+
 
   initFormDeposit():FormGroup{
     return this.formBuilder.group(

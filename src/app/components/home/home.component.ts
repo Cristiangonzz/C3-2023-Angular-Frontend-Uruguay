@@ -3,6 +3,7 @@ import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from '../../customer/interface/customer';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/login/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,22 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private customerService : CustomerService,
+  constructor(public customerService : CustomerService,
     private api : ApiService,
-    private router : Router){}
+    private router : Router,
+    private auth : AuthService){}
 
   salir = false;
-  @Input() customer!:Customer;
+  customer!:Customer;
   editado!: string;
 
   ngOnInit():void{
+    this.api.getEmailCustomer(this.auth.getUserLocalStorage().username).subscribe(
+      (data) => {
+        console.log(data);
+        this.customer = data;
+      }
+    );
   }
 
   Edit(){
@@ -32,9 +40,10 @@ export class HomeComponent implements OnInit{
   signOut(){
 
     localStorage.removeItem("token");
-    this.salir = true;
+    this.router.navigate(['singin']);
   }
  
+
 
   
 

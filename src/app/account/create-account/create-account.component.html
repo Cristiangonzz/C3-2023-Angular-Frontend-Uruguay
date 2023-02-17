@@ -1,28 +1,29 @@
 
 
 <h1 class="text-lg-center"> Create Account </h1>
-<div class="contenedor">
-  <div class="input-group mb-3">
-      <span class="input-group-text" id="inputGroup-sizing-default">Type Account</span>
-      <input type="text" class="form-control"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
+<div class="contenedor" [formGroup]="fromAccount">
+
+  <div class="col-md-6">
+      <label label for="inputDocumentType" class="form-label">Account Type</label>
+          <select style="margin: 3px;" class="form-select" aria-label="Default select example" formControlName="accountTypeId">
+            <option value="1">Caja de ahorro en Pesos ($)</option>
+            <option value="2">Caja de ahorro en Dolares (US$)</option>
+            <option value="3">Caja corriente en Pesos ($)</option>
+            <option value="4">Caja corriente en Dolares (US$)</option>
+          </select>
+
+          <div *ngIf="fromAccount.get('accountTypeId')?.touched && fromAccount.get('accountTypeId')?.errors?.['required']"
+      class="alert alert-danger"> this field is required</div>
+
+      </div>
   <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">Customer Id</span>
-      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-          Agree to terms and conditions
-        </label>
-        <div class="invalid-feedback">
-          You must agree before submitting.
-        </div>
-      </div>
+      <input type="text" class="form-control" formControlName="customer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      <div *ngIf="fromAccount.get('customer')?.touched && fromAccount.get('customer')?.errors?.['required']"
+      class="alert alert-danger"> this field is required</div>
     </div>
     <a routerLink="/account/account-type/create">Create Type Account</a>
     <div class="col-12">
-      <button class="btn btn-primary" type="submit" routerLink="account/find-all" routerLinkActive="router-link-active" >Confirm</button>
+      <button class="btn btn-primary" type="submit" (click)="createAccount()" >Confirm</button>
   </div>
 </div>

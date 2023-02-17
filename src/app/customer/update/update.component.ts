@@ -1,4 +1,4 @@
-import { Component, Host, OnInit } from '@angular/core';
+import { Component, Host, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { SignUpModel } from 'src/app/login/interfaces/signUpModel';
@@ -84,8 +84,8 @@ export class UpdateComponent implements OnInit{
     this.api.upDateCustomer(this.customerId,this.FormUpDate.getRawValue()).subscribe(
       (data:Customer)=>(this.customerEditado = data)
     ); 
+    this.router.navigate(['home']);
     this.editado = true;
-    //this.router.navigate(['home']);
   }
 
   paramsCustomerId():void{ 
