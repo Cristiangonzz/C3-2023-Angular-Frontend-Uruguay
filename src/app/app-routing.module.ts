@@ -65,7 +65,7 @@ const routes: Routes = [
    {path:`account/state/:id`,component: FindAllComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    {path:`account/Balance/:id`,component: FindAllComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    //Rutas de Transfer
-   {path:`transfer`,component: CreateTransferComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
+   {path:`createTransfer`,component: CreateTransferComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    {path:`transfer/list`,component: TransferListComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    //Rutas de Deposit 
    {path:`createDeposit`,component: CreateDepositComponent,pathMatch: 'full',canActivate:[PermisoGuard]},

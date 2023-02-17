@@ -11,15 +11,39 @@
       </tr>
     </thead>
 
-    <tbody  *ngFor="let account of lisAccounts">
+    <tbody  *ngFor="let transfer of transferList">
 
       <tr>
-        <td>{{account.id}}</td>
-        <td>{{account.coustomer_id.fullName}}</td>
-        <td>{{account.account_type_id.name}}</td>
-        <td>{{account.balance}}</td>
-        <td>{{account.state}}</td>
+        <td>{{transfer.id}}</td>
+        <td>{{transfer.outcome.id}}</td>
+        <td>{{transfer.income.id}}</td>
+        <td>{{transfer}}</td>
+        <td>{{transfer}}</td>
+        <td>{{transfer}}</td>
       </tr>
 
     </tbody>
 </table> -->
+
+<h1>Transferencias</h1>
+
+<table class="listado">
+  <thead>
+    <tr>
+      <th><h1>Transfer</h1></th>
+      <th><h1>Outcome</h1></th>
+      <th><h1>Income</h1></th>
+      <th><h1>Amount</h1></th>
+      <th><h1>Date </h1></th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let transfer of transferList">
+    <tr>
+      <td>{{transfer.id}}</td>
+      <td>{{transfer.outcome.id}}</td>
+      <td>{{transfer.income.id}}</td>
+      <td>{{transfer.amount}}</td>
+      <td>{{transfer.date_time}}</td>
+    </tr>
+  </tbody>
+</table>
