@@ -1,7 +1,7 @@
-import { Component, Host, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SignUpModel } from '../interfaces/signUpModel';
-import { DocumentTypeModel } from 'src/app/program-Funcional/interfaces/customerModel';
+
 import { CustomerService } from '../../customer/service/customer.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -58,26 +58,17 @@ export class SingupComponent implements OnInit{
     this.authService.newSigUp(this.customer);
 
     this.customerRegistrado = this.authService.getCustomerLocalStorage();
+    localStorage.removeItem('token');
     console.log(this.customerRegistrado);
     
     const signInFire : SignIn = {
       username : this.customer.email,
       password : this.customer.password,
     }
-
     this.authService.registerFire(signInFire);
 
-    sessionStorage.removeItem('token');
+
     this.router.navigate(['/singin']);
-
-
-
-
-    //Yatengo en el servicio para registrarme , faltan los datos restantes a parte del correo y contrasenia
-    // this.authService.register(this.customer) Me da error proque tengo que modificar mi registro al firebase porque solo
-    //esta con el correo
-   
-    
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from '../../customer/interface/customer';
 import { ApiService } from 'src/app/api/api.service';
@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit{
     localStorage.removeItem("token");
     this.router.navigate(['singin']);
   }
- 
+
+  
 
 
   

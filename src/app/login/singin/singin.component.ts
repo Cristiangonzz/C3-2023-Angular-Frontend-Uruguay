@@ -22,8 +22,8 @@ export class SinginComponent implements OnInit {
   customerLogeado!:Customer;
   logeado:boolean = false;
   userSignIn!: SignIn ;
-  
-  tokenUser : tokenUser = {
+  username!:string | null;
+  tokenUser : tokenUser | undefined= {
     username : "",
     password: "",
     iat:""
@@ -65,21 +65,41 @@ export class SinginComponent implements OnInit {
       //busca en el backend el correo y pass
       this.authService.newSigIn(this.userSignIn);
       
+    
       this.tokenUser = this.authService.getUserLocalStorage();
       console.log(this.tokenUser);
       
       //si es valida la cuenta entonces busco en mi backend el customer
       this.actualizarCustomerEmail(this.formLogin.get("username")?.value);
-  
-      //Si esta todo bien nos movemos al home
-      this.router.navigate(["/home"]) ;
-      this.logeado = true;
+      this.router.navigate(['/home']);
   }
 
   google(){
     return this.authService.loginGoogle()
-    .then(data => console.log(data.user.getIdToken()))
-    .catch(err => console.log(err))
+    .then(data => 
+      {
+        // this.router.navigate(["/home"]) ;
+        if(data.user.email){
+      console.log('Correo de google =>',data.user.email,data);
+      
+        this.api.getEmailCustomer( data.user.email).subscribe(
+          (data)=>{
+            this.userSignIn.username = data.email ;
+            this.userSignIn.password = data.password ;
+
+            //busca en el backend el correo y pass
+          this.authService.newSigIn(this.userSignIn);
+          
+          this.tokenUser = this.authService.getUserLocalStorage();
+          console.log(this.tokenUser);
+            this.router.navigate(['/home']);
+          }
+          )
+          
+        }
+    })
+    .catch(err => console.log(err));
+    
   }
 
 

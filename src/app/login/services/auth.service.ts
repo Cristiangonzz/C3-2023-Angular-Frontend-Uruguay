@@ -36,6 +36,7 @@ singOut(){
 
 loginGoogle(){
   return signInWithPopup(this.Auth, new GoogleAuthProvider());
+  
 }
 
 
@@ -79,14 +80,14 @@ loginGoogle(){
       return false;
     }
 
-    getUserLocalStorage():tokenUser {
+    getUserLocalStorage():any {
       
       const token = localStorage.getItem('token');
       if(token ){
         const tokenUser : tokenUser | null= this.helper.decodeToken(token);
         if(tokenUser)  return tokenUser;
       }
-        throw new Error("Token Vacio");
+
       
     }
 
