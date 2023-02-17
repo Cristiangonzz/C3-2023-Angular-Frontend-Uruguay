@@ -18,6 +18,8 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { DepositModule } from './deposit/deposit.module';
+import { TransferModel } from './transfer/interface/transferModel';
+import { TransferModule } from './transfer/transfer.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { DepositModule } from './deposit/deposit.module';
     CustomerModule,
     ComponentsModule,
     DepositModule,
+    TransferModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

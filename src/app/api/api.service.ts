@@ -135,7 +135,11 @@ export class ApiService {
     return this.http.post<TransferModel>(`${this.BASE_URL}/transfer/create`,transfers,this.httpOptions);
   }
   
-  //getTransfer(){}
+  getTransferAll():Observable<TransferModel[]>{
+    return this.http.get<TransferModel[]>(`${this.BASE_URL}/transfer/find-all`,this.httpOptions);
+  }
+
+  
   //getBalance
   
   //get account type

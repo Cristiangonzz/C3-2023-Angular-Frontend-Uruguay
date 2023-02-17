@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateTransferComponent } from './create-transfer/create-transfer.component';
 import { TransferListComponent } from './transfer-list/transfer-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,11 @@ import { TransferListComponent } from './transfer-list/transfer-list.component';
     TransferListComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    ReactiveFormsModule,
+  ],
+  exports:[
+    CreateTransferComponent,
+    TransferListComponent],
 })
 export class TransferModule { }
