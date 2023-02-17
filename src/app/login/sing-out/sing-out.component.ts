@@ -15,10 +15,10 @@ export class SingOutComponent {
   
   signOut(){
     
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if(token){
       this.api.sigOut(token);
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
     }
     this.out = true;
   }

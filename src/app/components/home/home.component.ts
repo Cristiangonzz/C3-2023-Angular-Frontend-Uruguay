@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit{
 
   signOut(){
 
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     this.salir = true;
   }
  

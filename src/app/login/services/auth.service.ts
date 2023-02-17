@@ -63,17 +63,17 @@ loginGoogle(){
     
     newSigIn(user : SignIn){
       this.apiService.logIn(user).subscribe(
-        (data) => sessionStorage.setItem('token',data));
+        (data) => localStorage.setItem('token',data));
     }
 
     newSigUp(newCustomer : SignUpModel){
       this.apiService.sigUp(newCustomer).subscribe(
-        (data) => sessionStorage.setItem('token',data));
+        (data) => localStorage.setItem('token',data));
     }
 
 
     hasUser():boolean{
-      if(typeof sessionStorage.getItem('token') === 'string'){
+      if(typeof localStorage.getItem('token') === 'string'){
         return true;
       }
       return false;
@@ -81,7 +81,7 @@ loginGoogle(){
 
     getUserLocalStorage():tokenUser {
       
-      const token = sessionStorage.getItem('token');
+      const token = localStorage.getItem('token');
       if(token ){
         const tokenUser : tokenUser | null= this.helper.decodeToken(token);
         if(tokenUser)  return tokenUser;
@@ -92,7 +92,7 @@ loginGoogle(){
 
     
     getCustomerLocalStorage():tokenCustomer{
-      const token = sessionStorage.getItem('token');
+      const token = localStorage.getItem('token');
       if(token ){
         const tokenCustomer : tokenCustomer | null= this.helper.decodeToken(token);
         if(tokenCustomer)  return tokenCustomer;
@@ -103,7 +103,7 @@ loginGoogle(){
     }
 
     signOut () {
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
       this.router.navigate(['/singin']);
     }
 

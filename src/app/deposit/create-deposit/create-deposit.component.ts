@@ -5,6 +5,7 @@ import { CreateDeposit } from '../interface/deposit';
 import { Account } from '../../account/interfaces/account';
 import { ApiService } from 'src/app/api/api.service';
 import { DepositModel } from '../interface/depositModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-deposit',
@@ -16,7 +17,7 @@ export class CreateDepositComponent implements OnInit {
   
   constructor(public depositService : DepositService,
     private formBuilder: FormBuilder,
-    private api : ApiService){}
+    private router : Router){}
 
 
     infoUltimoDeposito!: DepositModel;
@@ -42,6 +43,7 @@ export class CreateDepositComponent implements OnInit {
       (data:DepositModel) => (this.infoUltimoDeposito = data)
     );
     console.log(this.infoUltimoDeposito);
+    this.router.navigate(['/home']);
   }
 
   getAccount(){
