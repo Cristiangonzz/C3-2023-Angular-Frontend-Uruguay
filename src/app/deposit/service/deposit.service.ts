@@ -12,6 +12,10 @@ export class DepositService implements OnDestroy {
 
   constructor(private api : ApiService) { }
 
+  //Deposito Creado
+  protected Deposit!: DepositModel;
+  public createDepositObservable : BehaviorSubject<DepositModel> = 
+  new BehaviorSubject<DepositModel>(this.Deposit);
 
   //Todos los deposito
   protected DepositAll: DepositModel[] = [];
@@ -26,8 +30,22 @@ export class DepositService implements OnDestroy {
   ngOnDestroy(): void {
     this.AccountObservable.unsubscribe();
     this.DepositAllObservable.unsubscribe();
+    this.createDepositObservable.unsubscribe();
   }
 
+  //Emitimos el deposito creado
+  createDeposit(deposit:CreateDeposit){
+    if(this.createDepositObservable.observed && this.createDepositObservable.closed){
+      this.api.createDeposti(deposit).subscribe(
+        {
+          next: (data:DepositModel)=>(this.Deposit = data),
+          complete: ()=>(this.createDepositObservable.next(this.Deposit))
+        }
+      )
+    }
+  }
+
+  //Emitimos todos los depositos
   getDepositAll(){
     if(this.DepositAllObservable.observed && this.DepositAllObservable.closed){
       this.api.getDeposit().subscribe(
@@ -39,7 +57,7 @@ export class DepositService implements OnDestroy {
       )
     }
   }
-  
+  //Emitimos un deposito buscado
   getAccount(accountId : string){
     if(this.AccountObservable.observed && this.AccountObservable.closed){
       this.api.getAccount(accountId).subscribe(
