@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { Account } from '../../account/interfaces/account';
 import { CreateDeposit } from '../interface/deposit';
 import { DepositModel } from '../interface/depositModel';
@@ -70,8 +70,12 @@ export class DepositService implements OnDestroy {
   protected Account!: Account;
   public AccountObservable : BehaviorSubject<Account> = 
   new BehaviorSubject<Account>(this.Account);
-  
-  ngOnDestroy(): void {
+
+
+//--------------------------------------------------------------------------------------------------  
+ 
+
+ngOnDestroy(): void {
     this.AccountObservable.unsubscribe();
     this.DepositAllObservable.unsubscribe();
     this.createDepositObservable.unsubscribe();
@@ -90,17 +94,20 @@ export class DepositService implements OnDestroy {
   }
 
   //Emitimos todos los depositos
-  getDepositAll(){
+  getDepositAll= () => {
     if(this.DepositAllObservable.observed && !this.DepositAllObservable.closed){
-      this.api.getDeposit().subscribe(
+      this.api.getAllDeposit().subscribe(
         {
           next: (data:DepositModel[])=>(this.DepositAll = data),
-          complete: ()=>(this.DepositAllObservable.next(this.DepositAll))
-
-        }
-      )
+          complete: ()=>{
+            this.DepositAllObservable.next(this.DepositAll);
+            asyncScheduler.schedule(this.getDepositAll, 1000);
+          }});
+    }else{
+      asyncScheduler.schedule(this.getDepositAll, 100);
     }
   }
+
   //Emitimos un deposito buscado
   getAccount(accountId : string){
     if(this.AccountObservable.observed && !this.AccountObservable.closed){

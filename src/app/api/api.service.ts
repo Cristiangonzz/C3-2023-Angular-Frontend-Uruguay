@@ -122,8 +122,8 @@ export class ApiService {
     return this.http.post<DepositModel>(`${this.BASE_URL}/deposit/create`,account,this.httpOptions);
   }
 
-  getDeposit():Observable<DepositModel[]>{
-    return this.http.get<DepositModel[]>(`${this.BASE_URL}/find-all`,this.httpOptions);
+  getAllDeposit():Observable<DepositModel[]>{
+    return this.http.get<DepositModel[]>(`${this.BASE_URL}/deposit/find-all`,this.httpOptions);
 
   }
 

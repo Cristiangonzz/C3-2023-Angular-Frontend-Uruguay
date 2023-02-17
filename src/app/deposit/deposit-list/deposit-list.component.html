@@ -1,20 +1,24 @@
-<!-- <table class="table" >
+<table class="table" >
     <thead>
       <tr>
         <th scope="col">Deposit Id </th>
-        <th scope="col">Acoount Id </th>
+        <th scope="col">Account Id </th>
+        <th scope="col">Name customer</th>
         <th scope="col">Amount</th>
-        <th scope="col">Date Time</th>
+        <th scope="col">Date </th>
+        
 
       </tr>
     </thead>
-    <tbody  *ngFor="let account of lisAccounts">
+    <tbody  *ngFor="let deposito of depositosAll">
       <tr>
-        <td>{{account.id}}</td>
-        <td>{{account.coustomer_id.fullName}}</td>
-        <td>{{account.account_type_id.name}}</td>
-        <td>{{account.balance}}</td>
-        <td>{{account.state}}</td>
+        <td>{{deposito.id}}</td>
+        <td>{{deposito.account.id}}</td>
+        <td>{{deposito.account.coustomer_id.fullName}}</td>
+        <td>{{deposito.amount}}</td>
+        <td>{{deposito.date_time}}</td>
+
+       
       </tr>
     </tbody>
-</table> -->
+</table>
