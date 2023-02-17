@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { TransferModel } from '../interface/transferModel';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../../api/api.service';
+import { CreateTransferModel } from '../interface/createTransferModel';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,18 @@ export class TransferService implements OnDestroy{
 
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.transferObservable.unsubscribe();
   }
+
+
+
+  createTransfer(transfer : CreateTransferModel){
+    if(this.transferObservable.observed && !this.transferObservable.closed){
+      
+    }
+  }
+
+  getTransfer(){}
+
+  getAllTransfer=() => {}
 }

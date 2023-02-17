@@ -10,6 +10,8 @@ import { upDateCustomerModel } from '../customer/interface/upDateCustomer';
 import { DocumentType } from '../customer/interface/documentType';
 import { CreateDeposit } from '../deposit/interface/deposit';
 import { DepositModel } from '../deposit/interface/depositModel';
+import { CreateTransferModel } from '../transfer/interface/createTransferModel';
+import { TransferModel } from '../transfer/interface/transferModel';
 
 @Injectable({
   providedIn: 'root'
@@ -128,6 +130,11 @@ export class ApiService {
   }
 
   //--------------Transfer----------------------------
+  
+  createTransfers(transfers : CreateTransferModel):Observable<TransferModel>{
+    return this.http.post<TransferModel>(`${this.BASE_URL}/transfer/create`,transfers,this.httpOptions);
+  }
+  
   //getTransfer(){}
   //getBalance
   
