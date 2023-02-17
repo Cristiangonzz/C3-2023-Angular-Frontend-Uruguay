@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 
 @Component({
@@ -9,15 +9,9 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 export class ToolbarComponent implements OnInit {
 
   isAdmin = false;
-  @Output() toolbarAdmin = new EventEmitter<void>();
-
   constructor(){}
 
   ngOnInit(): void {}
 
-  onToolbarAdmin():void{
-    this.toolbarAdmin.emit();
-  }
-  
 
 }

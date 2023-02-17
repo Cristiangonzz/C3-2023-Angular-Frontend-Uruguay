@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Account } from '../interfaces/account';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-account-by-one',
@@ -17,35 +18,35 @@ export class AccountByOneComponent implements OnInit {
   constructor(
     public  accountservice : AccountService,
     private readonly route : ActivatedRoute,
-    private router :Router,){
+    private router :Router,
+    private api : ApiService){
 
       
     }
 
   ngOnInit(): void {
-    this.paramsCustomerId();
-    this.updateOneAccount(this.accountId);
-    this.getAccount();
+    this.paramsId();
+    console.log(this.accountId)
+    //this.getAccount();
+    
+    this.api.getAccount("1").subscribe(
+      (data) => (this.account =data)
+    )
     
   }
 
 
   // Capturo el parametro que se pasa por la rota
-  paramsCustomerId():void{ 
+  paramsId():void{ 
     this.route.params.subscribe(
       (params : Params) => {
-        this.accountId = params['id']
+        this.accountId = params['accountId']
       });
-  }
-
-
-//Ahora este id es el que tengo enviar al servicio para traer el customer 
-  updateOneAccount(id : string):void{
-    this.accountservice.updateOneAccount(id);
   }
 
 //Despues de que tengo el customer enotonces se lo igualo a mi varaible 
   getAccount(){
+    this.accountservice.updateOneAccount("1");
     this.accountservice.observableAccountOne.subscribe(
       (data : Account) => (this.account = data)
     );

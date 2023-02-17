@@ -1,4 +1,5 @@
-<form style="margin-left: 30%;" [formGroup]="formLogin" *ngIf="!logeado">
+<!-- *ngIf="!logeado" -->
+<form style="margin-left: 30%;" [formGroup]="formLogin" >
 	<div>
 		<section >
 			<h1 style="margin: 15px;color:rgb(8, 82, 141);font-family:'Times New Roman', Times, serif;font-size: 25px;" > Ingreso de Usuario</h1>
@@ -20,6 +21,6 @@
 	</div>
 </form>
 
-<div *ngIf="logeado">
+<!-- <div *ngIf="logeado">
 	<app-home [customer]="customerLogeado"></app-home>
-</div>
+</div> -->

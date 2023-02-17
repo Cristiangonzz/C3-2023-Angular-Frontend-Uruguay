@@ -45,7 +45,7 @@ const routes: Routes = [
    {path:`account/find-all`,component: AccountListComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    {path:`accountEdit/:id`,component:UpDateComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    {path:`account/account-type/create`,component: CreateAccountTypeComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
-   {path:`account/customer/:customerId`,component: AccountByOneComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
+   {path:`account/customer/:accountId`,component: AccountByOneComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
    //{path:`account/customer/:accountId`, component: FindAllComponent,pathMatch: 'full'},
    {path:`account/account-type/find-all`,component: FindAllComponent,pathMatch: 'full',canActivate:[PermisoGuard]},
  

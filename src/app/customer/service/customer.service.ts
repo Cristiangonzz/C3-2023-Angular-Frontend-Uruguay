@@ -46,6 +46,8 @@ export class CustomerService implements OnDestroy {
     this.customerOneObservable.unsubscribe();
     this.documentTypeObservable.unsubscribe();
     this.SignUpObservable.unsubscribe();
+
+    
     this.customerLogeadoObservable.unsubscribe();
   }
 

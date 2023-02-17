@@ -39,6 +39,9 @@ export class SinginComponent implements OnInit {
   
   ngOnInit(): void {
     this.formLogin = this.initFormLogin();
+    this.api.getEmailCustomer(this.formLogin.get('username')?.value).subscribe(
+      (data)=>(console.log(data))
+    )
   }
 
   
@@ -69,11 +72,10 @@ export class SinginComponent implements OnInit {
       console.log(this.tokenUser);
       
       //si es valida la cuenta entonces busco en mi backend el customer
-      this.actualizarCustomerEmail(this.formLogin.get("username")?.value);
-      this.getCustomerEmail();
+      this.actualizarCustomerEmail(this.formLogin.get('username')?.value);
        
       //Si esta todo bien nos movemos al home
-      //this.router.navigate(["/home"]) ;
+      this.router.navigate(["/home"]) ;
       this.logeado = true;
   }
 
@@ -87,16 +89,11 @@ export class SinginComponent implements OnInit {
   //Ahora este id es el que tengo enviar al servicio para traer el customer 
   actualizarCustomerEmail(email : string):void{
     this.customerService.getEmail(email);
-  }
 
-//Despues de que tengo el customer enotonces se lo igualo a mi varaible 
-  getCustomerEmail(){
-    this.customerService.customerLogeadoObservable.subscribe(
+      this.customerService.customerLogeadoObservable.subscribe(
       (data : Customer) => { this.customerLogeado = data;
       console.log(this.customerLogeado)}
     )
-    this.customerService.getEmail(this.formLogin.get('username')?.value);
-
   }
   
 

@@ -28,8 +28,8 @@ export class TransferService implements OnDestroy{
 
 
   ngOnDestroy(): void {
-    this.transferObservable.unsubscribe();
     this.transferAllObservable.unsubscribe();
+    this.transferObservable.unsubscribe();
   }
 
   createTransfer(transfer : CreateTransferModel){
