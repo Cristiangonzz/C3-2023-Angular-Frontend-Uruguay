@@ -46,7 +46,7 @@ export class CustomerService implements OnDestroy {
     this.customerOneObservable.unsubscribe();
     this.documentTypeObservable.unsubscribe();
     this.SignUpObservable.unsubscribe();
-    //this.customerLogeadoObservable.unsubscribe();
+    this.customerLogeadoObservable.unsubscribe();
   }
 
   
@@ -94,7 +94,7 @@ export class CustomerService implements OnDestroy {
   getEmail(email: string ):void{  
     if(this.customerLogeadoObservable.observed && !this.customerLogeadoObservable.closed){
       this.apiService.getEmailCustomer(email).subscribe({
-        next : (data) => (this.customerLogeado = data),
+        next : (data:Customer) => (this.customerLogeado = data),
         complete: () => (this.customerLogeadoObservable.next(this.customerLogeado))
       });
     }

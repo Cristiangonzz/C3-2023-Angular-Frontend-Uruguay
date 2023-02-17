@@ -9,6 +9,7 @@ import { Customer } from 'src/app/customer/interface/customer';
 import { ApiService } from '../../api/api.service';
 
 
+
 @Component({
   selector: 'app-singin',
   providers:[AuthService,CustomerService],
