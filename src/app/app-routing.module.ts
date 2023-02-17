@@ -19,6 +19,7 @@ import { UpDateComponent } from './account/up-date/up-date.component';
 import { AccountByOneComponent } from './account/account-by-one/account-by-one.component';
 import { HomeComponent } from './components/home/home.component';
 import { PermisoGuard } from './guards/permiso.guard';
+import { CreateDepositComponent } from './deposit/create-deposit/create-deposit.component';
 
 const routes: Routes = [
   
@@ -67,7 +68,7 @@ const routes: Routes = [
    {path:`transfer`,component: CreateTransferComponent,pathMatch: 'full'},
    {path:`transfer/list`,component: TransferListComponent,pathMatch: 'full'},
    //Rutas de Deposit 
-   {path:`deposit`,component: DepositListComponent,pathMatch: 'full'},
+   {path:`createDeposit`,component: CreateDepositComponent,pathMatch: 'full'},
    {path:`deposit/list`,component: DepositListComponent,pathMatch: 'full'},
 ];
 

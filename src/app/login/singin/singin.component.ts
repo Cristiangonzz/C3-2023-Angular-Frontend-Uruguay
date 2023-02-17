@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer/service/customer.service';
 import { Customer } from 'src/app/customer/interface/customer';
 import { ApiService } from '../../api/api.service';
+import { CreateDeposit } from 'src/app/deposit/interface/deposit';
+import { DepositModel } from 'src/app/deposit/interface/depositModel';
 
 
 @Component({
@@ -36,7 +38,6 @@ export class SinginComponent implements OnInit {
     private api : ApiService ){}
   
   ngOnInit(): void {
-      
     this.formLogin = this.initFormLogin();
   }
 

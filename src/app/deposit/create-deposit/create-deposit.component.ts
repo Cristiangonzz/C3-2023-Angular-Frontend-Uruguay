@@ -14,35 +14,43 @@ import { DepositModel } from '../interface/depositModel';
 })
 export class CreateDepositComponent implements OnInit {
   
-  constructor(private depositService : DepositService,
+  constructor(public depositService : DepositService,
     private formBuilder: FormBuilder,
     private api : ApiService){}
 
 
-    //infoDeposito!: DepositModel;
+    infoUltimoDeposito!: DepositModel;
 
-    deposito! : CreateDeposit;
+    deposito : CreateDeposit = {
+      accountId: "1",
+      amount: 10000
+    };
+
     account!: Account;
+
     public formDeposit!: FormGroup ; 
 
   ngOnInit(): void {
     this.formDeposit = this.initFormDeposit(); 
-    this.datosDeposito();
-    this.getAccount();
-
+    
   }
   
   depositar(){
-    this.api.createDeposti(this.deposito);
-    console.log(this.account.balance);
+    this.datosDeposito();
+    this.depositService.createDeposit(this.deposito);
+    this.depositService.createDepositObservable.subscribe(
+      (data:DepositModel) => (this.infoUltimoDeposito = data)
+    );
+    console.log(this.infoUltimoDeposito);
   }
 
   getAccount(){
     this.depositService.getAccount(this.deposito.accountId);
     this.depositService.AccountObservable.subscribe(
-      (account : Account) =>(this.account = account)
+      (account : Account) =>(console.log(account))
     );
   }
+
   datosDeposito(){
     this.deposito.accountId = this.formDeposit.get('accountId')?.value;
     this.deposito.amount = parseInt(this.formDeposit.get('amount')?.value);
@@ -51,8 +59,8 @@ export class CreateDepositComponent implements OnInit {
   initFormDeposit():FormGroup{
     return this.formBuilder.group(
      {
-     accountId:['',[Validators.required]],
-     amount:['',[Validators.required]],
+      accountId:['',[Validators.required]],
+      amount:['',[Validators.required]],
    });
  }
 

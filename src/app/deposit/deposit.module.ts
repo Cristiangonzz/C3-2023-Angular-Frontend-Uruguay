@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     
   ],
-  exports:[]
+  exports:[
+    CreateDepositComponent,
+    DepositListComponent]
 })
 export class DepositModule { }
