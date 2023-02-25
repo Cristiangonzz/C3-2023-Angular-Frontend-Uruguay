@@ -1,26 +1,24 @@
-<!-- *ngIf="!logeado" -->
+
 <form style="margin-left: 30%;" [formGroup]="formLogin" >
-	<div>
+	<div >
 		<section >
 			<h1 style="margin: 15px;color:rgb(8, 82, 141);font-family:'Times New Roman', Times, serif;font-size: 25px;" > Ingreso de Usuario</h1>
 		</section>
 		<div class="col-md-8" >
 				<label for="inputEmail4"  class="form-label"
-				>Email</label>
+				> Email </label>
 				<input type="email" formControlName="username" class="form-control" id="inputEmail4" placeholder="Exemplo: Exemplo@gmail.com">
 		</div>
 		<div class="col-md-8">
-				<label for="inputPassword4" class="form-label">Password</label>
+				<label for="inputPassword4" class="form-label"> Password </label>
 				<input type="password"  formControlName="password" class="form-control" id="inputPassword4">
 		</div>
 		<a routerLink="/signUp" style="margin: 10%;" >Sign Up</a>
 		<div class="col-12" style="top: 20px;">
-			<button type="submit" class="btn btn-primary"  (click)="signIn()" style="width: 250px;" >Ingresar</button>
+			<button type="submit" class="btn btn-primary" (click)="signIn()" style="width: 250px;"> Ingresar </button>
 		</div>
-		<button class="btn btn-info"  (click)="google()">iniciar sesion con Google</button>
+		<button class="btn btn-info"  (click)="google()"> iniciar sesion con Google </button>
 	</div>
-</form>
 
-<!-- <div *ngIf="logeado">
-	<app-home [customer]="customerLogeado"></app-home>
-</div> -->
+
+</form>

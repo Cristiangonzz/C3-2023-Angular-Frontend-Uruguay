@@ -4,8 +4,7 @@ import { Account } from '../account/interfaces/account';
 import { Customer } from '../customer/interface/customer';
 import { Injectable } from '@angular/core';
 import { SignUpModel } from '../login/interfaces/signUpModel';
-import { SignIn, UserResponse } from '../login/interfaces/signInModel';
-import { CookieService } from 'ngx-cookie-service';
+import { SignIn } from '../login/interfaces/signInModel';
 import { upDateCustomerModel } from '../customer/interface/upDateCustomer';
 import { DocumentType } from '../customer/interface/documentType';
 import { CreateDeposit } from '../deposit/interface/deposit';
@@ -22,8 +21,7 @@ export class ApiService {
 
   BASE_URL = "http://localhost:3000";
 
-  constructor(private http: HttpClient,
-    private cookies : CookieService) { }
+  constructor(private http: HttpClient) { }
 
   httpOptions = {
     headers : new HttpHeaders({

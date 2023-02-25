@@ -11,40 +11,37 @@ import { EjercicioComponent } from './program-Funcional/ejercicio/ejercicio.comp
 import { AccountModule } from './account/account.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerModule } from './customer/customer.module';
-import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { CookieService } from 'ngx-cookie-service';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { DepositModule } from './deposit/deposit.module';
-import { TransferModel } from './transfer/interface/transferModel';
 import { TransferModule } from './transfer/transfer.module';
+import { ToolbarComponent } from "./shared/toolbar/toolbar.component";
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EjercicioComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-
-    MaterialModule,
-    SharedModule,
-    LoginModule,
-    AccountModule,
-    CustomerModule,
-    ComponentsModule,
-    DepositModule,
-    TransferModule,
-
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    
-  ],
-  providers: [CookieService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        EjercicioComponent,
+    ],
+    providers: [CookieService],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MaterialModule,
+        LoginModule,
+        AccountModule,
+        CustomerModule,
+        ComponentsModule,
+        DepositModule,
+        TransferModule,
+        SharedModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+    ]
 })
 export class AppModule { }

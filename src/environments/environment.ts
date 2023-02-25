@@ -7,3 +7,4 @@ export const environment = {
     authDomain: 'bank-training.firebaseapp.com',
     messagingSenderId: '149077530247',
   },};
+

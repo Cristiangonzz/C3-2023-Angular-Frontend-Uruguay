@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ComponentsModule } from '../components/components.module';
 
 
+
 @NgModule({
   declarations: [
     SinginComponent,
@@ -25,6 +26,7 @@ import { ComponentsModule } from '../components/components.module';
     ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
+
   ],
   exports:[
     SinginComponent,

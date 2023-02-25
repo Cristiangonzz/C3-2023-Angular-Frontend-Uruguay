@@ -4,6 +4,7 @@ import { Customer } from '../../customer/interface/customer';
 import { ApiService } from 'src/app/api/api.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,22 +14,25 @@ import { AuthService } from 'src/app/login/services/auth.service';
 })
 export class HomeComponent implements OnInit{
 
-  constructor(public customerService : CustomerService,
-    private api : ApiService,
-    private router : Router,
-    private auth : AuthService){}
+
+  constructor(
+    private customerService : CustomerService,
+    private router : Router,){
+    }
 
   salir = false;
   customer!:Customer;
   editado!: string;
 
+  email!:string ;
+
   ngOnInit():void{
-    this.api.getEmailCustomer(this.auth.getUserLocalStorage().username).subscribe(
-      (data) => {
-        console.log(data);
-        this.customer = data;
-      }
-    );
+
+   this.customerService.UpDateSubjectEmail();
+   this.customerService.customerLogeadoObservable.subscribe(
+    (customer : Customer) => (this.customer = customer)
+   );
+   
   }
 
   Edit(){

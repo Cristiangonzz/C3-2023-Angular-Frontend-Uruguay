@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import { SignUpModel } from '../../login/interfaces/signUpModel';
 import { DocumentType } from '../interface/documentType';
 import { upDateCustomerModel } from '../interface/upDateCustomer';
+import { AuthService } from 'src/app/login/services/auth.service';
+import { tokenUser } from '../../login/interfaces/tokenModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,42 +14,45 @@ import { upDateCustomerModel } from '../interface/upDateCustomer';
 export class CustomerService implements OnDestroy {
 
   //repito codigo para evitar errores con los modelos signUp y customer
-  protected tokenSignUp!: string;
+  tokenSignUp!: string;
   public SignUpObservable : BehaviorSubject<string> = 
   new BehaviorSubject<string>(this.tokenSignUp);
 
   //get Document Type
-  protected documentType!: DocumentType;
+  documentType!: DocumentType;
   public documentTypeObservable : BehaviorSubject<DocumentType> = 
   new BehaviorSubject<DocumentType>(this.documentType);
 
   //get All customer
-  protected newCustomerList : Customer[] = [];
+  newCustomerList : Customer[] = [];
   public customerAllObservable: BehaviorSubject<Customer[]> = 
   new BehaviorSubject<Customer[]>(this.newCustomerList);
   
   
   //get One Customer
-  protected customer!: Customer;
+  customer!: Customer;
   public customerOneObservable : BehaviorSubject<Customer> = 
   new BehaviorSubject<Customer>(this.customer);
 
   
-
   //get Customer Logeado
   protected customerLogeado!: Customer;
-  public customerLogeadoObservable : BehaviorSubject<Customer> = new BehaviorSubject<Customer>(this.customerLogeado);
+  public customerLogeadoObservable : BehaviorSubject < Customer >
+   = new BehaviorSubject < Customer > ( this.customerLogeado );
+  
 
-  constructor(private apiService : ApiService){}
-
-//Para detener la emision de datos
+  
+  constructor(
+    private apiService : ApiService,
+    private serviceAuth : AuthService){ 
+    }
+  
+  //Para detener la emision de datos
   ngOnDestroy(): void {
     this.customerAllObservable.unsubscribe();
     this.customerOneObservable.unsubscribe();
     this.documentTypeObservable.unsubscribe();
     this.SignUpObservable.unsubscribe();
-
-    
     this.customerLogeadoObservable.unsubscribe();
   }
 
@@ -81,9 +86,9 @@ export class CustomerService implements OnDestroy {
         });
     }
   }
-
+  
   //Emito un document type
-  getDocumentType(document : string):void{
+  getDocumentType(document : string){
     if(this.documentTypeObservable.observed && !this.documentTypeObservable.closed){
       this.apiService.getDocumentType(document).subscribe({
         next : (data) => (this.documentType = data),
@@ -91,13 +96,15 @@ export class CustomerService implements OnDestroy {
       });
     }
   }
-
-  //Emito un Customer buscado por email
-  getEmail(email: string ):void{  
-    if(this.customerLogeadoObservable.observed && !this.customerLogeadoObservable.closed){
-      this.apiService.getEmailCustomer(email).subscribe({
-        next : (data:Customer) => (this.customerLogeado = data),
-        complete: () => (this.customerLogeadoObservable.next(this.customerLogeado))
+  
+   //Emito un Customer buscado por email
+  UpDateSubjectEmail(){ 
+    //El error es que no me lo toma como observable  el this.customerLogeadoObservable.observed 
+    if(!this.customerLogeadoObservable.closed && this.serviceAuth.hasUser() ){
+      const  user : tokenUser = this.serviceAuth.getUserLocalStorage();
+      this.apiService.getEmailCustomer( user.username ).subscribe({
+        next : ( data : Customer ) => ( this.customerLogeado = data ),
+        complete: () => (this.customerLogeadoObservable.next( this.customerLogeado ))
       });
     }
   }
@@ -106,7 +113,7 @@ export class CustomerService implements OnDestroy {
 
 
    //Editar Customer 
-   protected EditarCustomer!: Customer;
+   EditarCustomer!: Customer;
    public editarCustomerObservable : BehaviorSubject<Customer> = 
    new BehaviorSubject<Customer>(this.EditarCustomer);
 

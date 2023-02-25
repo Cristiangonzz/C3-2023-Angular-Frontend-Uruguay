@@ -1,9 +1,9 @@
 
-    <div class="d-flex flex-column align-items-center" > 
+<div class="d-flex flex-column align-items-center" > 
     
         <!-- <small>
-        <img alt="fotoperfil" [src]="customer.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3">
-        </small> -->
+         <img alt="fotoperfil" [src]="customer.avatarUrl || 'https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg'" class="rounded-circle w-10 h-10 mt-3"> 
+        </small>  -->
         <h4 class="text-xl font-weight-bold">Nombre completo:  <ng-container *ngIf="customer">{{ customer.fullName }}</ng-container></h4>
         <h4 class="text-xl font-weight-bold">Documento: <ng-container *ngIf="customer">{{ customer.document }}</ng-container></h4>
         <h4 class="text-xl font-weight-bold">Documento ID: <ng-container *ngIf="customer">{{ customer.documentType.id }}</ng-container></h4>
@@ -15,3 +15,8 @@
     <button   (click)="signOut()"  routerLink="/singin" class="btn btn-danger">Salir</button>
 
 </div> 
+
+
+
+
+ 

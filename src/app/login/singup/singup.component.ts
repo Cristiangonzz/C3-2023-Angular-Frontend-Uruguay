@@ -29,7 +29,7 @@ export class SingupComponent implements OnInit{
     password: "",
     
   }
-  customerRegistrado : SignUpModel = {  
+  customerRegistrado : SignUpModel | undefined = {  
     documentTypeId: "",
     accountTypeId: "",
     document: "",
@@ -57,9 +57,8 @@ export class SingupComponent implements OnInit{
 
     this.authService.newSigUp(this.customer);
 
-    this.customerRegistrado = this.authService.getCustomerLocalStorage();
-    localStorage.removeItem('token');
-    console.log(this.customerRegistrado);
+    this.manipulaciondeToken();
+    
     
     const signInFire : SignIn = {
       username : this.customer.email,
@@ -71,6 +70,12 @@ export class SingupComponent implements OnInit{
     this.router.navigate(['/singin']);
   }
 
+  manipulaciondeToken(){
+    // if(!this.authService.hasUser()) throw new Error('No hay token (signUp component )');
+    this.customerRegistrado = this.authService.getCustomerLocalStorage();
+    localStorage.removeItem('token');
+    console.log(this.customerRegistrado);
+  }
 
   initForm():FormGroup{
     return this.formBuilder.group(

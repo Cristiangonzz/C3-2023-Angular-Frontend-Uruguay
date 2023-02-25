@@ -1,45 +1,53 @@
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <ng-container *ngIf="!isAdmin,else viewAdmin">
   <div class="container-fluid">
+
+    <ng-container *ngIf="!isAdmin,else viewAdmin">
     <a class="navbar-brand" style="margin-left: 45%;color: rgb(5, 5, 106);" (click)="btnPrincipal()">e-Bank</a>
-    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </ng-container>
+
+    <ng-template #viewAdmin>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="navbar-brand" style="margin-left: 4%;color: rgb(5, 5, 106);font-size: 25px;" (click)="btnPrincipal()">e-Bank</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"  routerLink="/account/find-all">
+            Accounts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/customerList">List Customers</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Transfer
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/createTransfer">Create Transfer</a></li>
+            <li><a class="dropdown-item" routerLink="/transfer/list">List Transfer</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Deposit
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/createDeposit">Create Deposit</a></li>
+            <li><a class="dropdown-item" routerLink="/deposit/list">List Deposit</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </ng-template>
   </div>
-  </ng-container>
-  <button (click)="isAdmin = !isAdmin">Admin</button>
-  <ng-template #viewAdmin>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        
-        <ul class="navbar-nav">
-          <a class="navbar-brand" style="margin-left: 4%;color: rgb(5, 5, 106);" (click)="btnPrincipal()">e-Bank</a>
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/account/find-all">Accounts</a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/customerList">List Customers</a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/createTransfer">Create Transfer</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/transfer/list">List Transfer</a>
-          </li>
-    
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/search">search</a>
-          </li>
-
-          <li class="nav-item">
-            <a routerLink="/createDeposit" class="nav-link">Create Deposit</a> 
-          </li>
-               
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/deposit/list">List Depositos</a>
-          </li>
-   
-        </ul>
-      </div>
-    </ng-template>
 </nav>

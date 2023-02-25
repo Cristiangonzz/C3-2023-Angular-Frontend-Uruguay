@@ -23,10 +23,6 @@ export class TransferService implements OnDestroy{
   public transferObservable : BehaviorSubject<TransferModel> = 
   new BehaviorSubject<TransferModel>(this.tansfer);
 
-
-
-
-
   ngOnDestroy(): void {
     this.transferAllObservable.unsubscribe();
     this.transferObservable.unsubscribe();

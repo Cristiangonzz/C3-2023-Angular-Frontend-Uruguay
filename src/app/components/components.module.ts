@@ -5,9 +5,9 @@ import { FindAllComponent } from './find-all/find-all.component';
 import { FindByOneIdComponent } from './buscador/find-by-one-id.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 
@@ -22,10 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    
+    MaterialModule,
+
+
     
 
   ],
